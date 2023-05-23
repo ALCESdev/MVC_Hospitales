@@ -1,0 +1,35 @@
+﻿@using MVC_Hospitales.Models
+@model IQueryable<SALA>
+
+@if (Model != null)
+{
+
+    <table class="table">
+        <tr>
+            <th>
+                TIPOS DE CUIDADOS (ESPECIALIDAD)
+            </th>
+            <th>
+                CAMAS DISPONIBLES
+            </th>
+        </tr>
+
+        @foreach (var sala in Model)
+        {
+            <tr>
+                <td>
+                    @sala.NOMBRE
+                </td>
+                <td>
+                    @sala.NUM_CAMA
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+
+else
+{
+    <h2 style="color:red">No existe personal médico en este hospital</h2>
+}

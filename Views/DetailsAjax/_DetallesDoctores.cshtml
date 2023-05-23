@@ -1,0 +1,47 @@
+﻿@using MVC_Hospitales.Models
+@model IQueryable<DOCTOR>
+
+@if (Model != null)
+{
+
+    <table class="table">
+        <tr>
+            <th>
+                APELLIDO
+            </th>
+            <th>
+                ESPECIALIDAD
+            </th>
+            <th>
+                SALARIO
+            </th>
+            <th>
+                ACCIONES
+            </th>
+        </tr>
+
+        @foreach (var doc in Model)
+        {
+            <tr>
+                <td>
+                    @doc.APELLIDO
+                </td>
+                <td>
+                    @doc.ESPECIALIDAD
+                </td>
+                <td>
+                    @doc.SALARIO €.
+                </td>
+                <td>
+                    @Html.ActionLink("Gestionar", "GestionEquipo", "Gestion", new { docNo = doc.DOCTOR_NO }, null)
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+
+else
+{
+    <h2 style="color:red">No existe equipo médico en este hospital</h2>
+}

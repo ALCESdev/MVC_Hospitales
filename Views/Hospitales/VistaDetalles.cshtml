@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "VistaDetalles";
+}
+@using MVC_Hospitales.Models
+@model HOSPITAL
+
+<h2>Hospital @ViewBag.Nombre</h2>
+
+<section class="hospContainer">
+    <div class="hospInfo">
+        <div class="hospImgContainer">
+            <img src="~/Images/Hospitals/@Model.LINK_IMAGEN" alt="Imágen @Model.NOMBRE" style="height: 150px" />
+        </div>
+        <div>
+            <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+            </p>
+        </div>
+    </div>
+</section>
+
+<div class="accordion accordion-flush" id="accordionFlushExample">
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingOne">
+            @using (Ajax.BeginForm("DoctorFilter", "DetailsAjax", new { hospCod = Model.HOSPITAL_COD }, new AjaxOptions
+            {
+                HttpMethod = "POST",
+                UpdateTargetId = "docView",
+                InsertionMode = InsertionMode.Replace
+            }))
+            {
+                <button class="accordion-button collapsed" name="@Model.HOSPITAL_COD" type="submit" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                    EQUIPO MÉDICO
+                </button>
+            }
+        </h2>
+        <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+            <div id="docView" class="accordion-body"></div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingTwo">
+            @using (Ajax.BeginForm("PlantillaFilter", "DetailsAjax", new { hospCod = Model.HOSPITAL_COD }, new AjaxOptions
+            {
+                HttpMethod = "POST",
+                UpdateTargetId = "planView",
+                InsertionMode = InsertionMode.Replace
+            }))
+            {
+                <button class="accordion-button collapsed" name="@Model.HOSPITAL_COD" type="submit" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+                    PLANTILLA
+                </button>
+            }
+        </h2>
+        <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+            <div id="planView" class="accordion-body"></div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="flush-headingThree">
+            @using (Ajax.BeginForm("SalaFilter", "DetailsAjax", new { hospCod = Model.HOSPITAL_COD }, new AjaxOptions
+            {
+                HttpMethod = "POST",
+                UpdateTargetId = "salaView",
+                InsertionMode = InsertionMode.Replace
+            }))
+            {
+                <button class="accordion-button collapsed" name="@Model.HOSPITAL_COD" type="submit" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                    SALAS
+                </button>
+            }
+        </h2>
+        <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+            <div id="salaView" class="accordion-body"></div>
+        </div>
+    </div>
+</div>
+
+
+@section scripts
+{
+    @Scripts.Render("~/Scripts/jquery-3.4.1.js")
+    @Scripts.Render("~/Scripts/jquery.unobtrusive-ajax.js")
+}
