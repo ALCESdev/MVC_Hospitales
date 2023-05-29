@@ -1,41 +1,53 @@
 ﻿@using MVC_Hospitales.Models
 @model IQueryable<PLANTILLA>
 
+<link href="@Url.Content("~/SASS/main.css")" rel="stylesheet" />
+
 @if (Model != null)
 {
 
     <table class="table">
-        <tr>
-            <th>
-                APELLIDO
-            </th>
-            <th>
-                FUNCIÓN
-            </th>
-            <th>
-                SALARIO
-            </th>
-            <th>
-                ACCIONES
-            </th>
-        </tr>
+        <thead>
+            <tr>
+                <th>
+                    APELLIDO
+                </th>
+                <th>
+                    FUNCIÓN
+                </th>
+                <th>
+                    TURNO
+                </th>
+                <th>
+                    SALARIO
+                </th>
+                <th>
+                    ACCIONES
+                </th>
+            </tr>
+        </thead>
 
         @foreach (var plan in Model)
         {
-            <tr>
-                <td>
-                    @plan.APELLIDO
-                </td>
-                <td>
-                    @plan.T
-                </td>
-                <td>
-                    @plan.SALARIO €.
-                </td>
-                <td>
-                    @Html.ActionLink("Gestionar", "GestionEquipo", "Gestion", new { empNo = plan.EMPLEADO_NO }, null)
-                </td>
-            </tr>
+            <tbody>
+                <tr>
+                    <td class="align-middle">
+                        @plan.APELLIDO
+                    </td>
+                    <td class="align-middle">
+                        @plan.FUNCION
+                    </td>
+                    <td class="align-middle">
+                        @plan.T
+                    </td>
+                    <td class="align-middle">
+                        @plan.SALARIO €.
+                    </td>
+                    <td class="align-middle">
+                        @Html.ActionLink("Nómina", "NominaPersonal", "Gestion", new { empNo = plan.EMPLEADO_NO }, new { target = "_blank" })
+                    </td>
+                </tr>
+            </tbody>
         }
 
     </table>

@@ -35,6 +35,15 @@ namespace MVC_Hospitales.Models
             return consulta;
         }
 
+        public DOCTOR GetInfoDoctor(String docNo)
+        {
+            var consulta = from doc in contexto.DOCTOR
+                           where doc.DOCTOR_NO == docNo
+                           select doc;
+
+            return consulta.FirstOrDefault();
+        }
+
         public IQueryable<PLANTILLA> GetPlantilla(String hopsCod)
         {
             var consulta = from plan in contexto.PLANTILLA
@@ -42,6 +51,15 @@ namespace MVC_Hospitales.Models
                            select plan;
 
             return consulta;
+        }
+
+        public PLANTILLA GetInfoPlantilla(String empNo)
+        {
+            var consulta = from plan in contexto.PLANTILLA
+                           where plan.EMPLEADO_NO == empNo
+                           select plan;
+
+            return consulta.FirstOrDefault();
         }
 
         public IQueryable<SALA> GetSalas(String hopsCod)

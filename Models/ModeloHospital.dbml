@@ -53,6 +53,7 @@
       <Column Name="TELEFONO" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="NUM_CAMA" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="LINK_IMAGEN" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="DESCRIPCION" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
     </Type>
   </Table>
 </Database>

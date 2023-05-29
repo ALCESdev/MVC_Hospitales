@@ -843,6 +843,8 @@ namespace MVC_Hospitales.Models
 		
 		private string _LINK_IMAGEN;
 		
+		private string _DESCRIPCION;
+		
     #region Definiciones de métodos de extensibilidad
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -859,6 +861,8 @@ namespace MVC_Hospitales.Models
     partial void OnNUM_CAMAChanged();
     partial void OnLINK_IMAGENChanging(string value);
     partial void OnLINK_IMAGENChanged();
+    partial void OnDESCRIPCIONChanging(string value);
+    partial void OnDESCRIPCIONChanged();
     #endregion
 		
 		public HOSPITAL()
@@ -982,6 +986,26 @@ namespace MVC_Hospitales.Models
 					this._LINK_IMAGEN = value;
 					this.SendPropertyChanged("LINK_IMAGEN");
 					this.OnLINK_IMAGENChanged();
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_DESCRIPCION", DbType="NVarChar(MAX)")]
+		public string DESCRIPCION
+		{
+			get
+			{
+				return this._DESCRIPCION;
+			}
+			set
+			{
+				if ((this._DESCRIPCION != value))
+				{
+					this.OnDESCRIPCIONChanging(value);
+					this.SendPropertyChanging();
+					this._DESCRIPCION = value;
+					this.SendPropertyChanged("DESCRIPCION");
+					this.OnDESCRIPCIONChanged();
 				}
 			}
 		}

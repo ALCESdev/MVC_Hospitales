@@ -3,35 +3,39 @@
 }
 @using MVC_Hospitales.Models
 @model IQueryable<HOSPITAL>
-<link href="@Url.Content("~/Content/site.css")" rel="stylesheet" />
+<link href="@Url.Content("~/SASS/main.css")" rel="stylesheet" />
 
 
-<h2>Nuestros Hospitales</h2>
+<h2 class="text-center mt-5 text-primary">Nuestros Hospitales</h2>
 
 @if (Model != null)
 {
-    <div class="container">
-        <div class="row mt-5 mb-5">
-            @foreach (var hosp in Model)
-            {
-                <div class="col-12 col-md-6 mb-4">
-                    <div class="card bg-light">
-                        <div class="row g-0">
-                            <div class="col-md-6">
-                                <img src="~/Images/Hospitals/@hosp.LINK_IMAGEN" class="card-img" alt="Imágen @hosp.NOMBRE">
-                            </div>
-                            <div class="col-md-6">
-                                <div class="card-body ml-3">
-                                    <h5 class="card-title">@hosp.NOMBRE</h5>
-                                    <p class="card-text">@hosp.DIRECCION</p>
-                                    <p class="card-text">@hosp.TELEFONO</p>
-                                    <p class="card-text">@Html.ActionLink("Más detalles", "VistaDetalles", "Hospitales", new { hospCod = hosp.HOSPITAL_COD, hospNom = hosp.NOMBRE }, null)</p>
+    <div class="container mb-5">
+        <div class="container px-4 py-5 " id="custom-cards">
+            <div class="row row-cols-1 row-cols-lg-2 align-items-stretch g-5 py-1">
+                @foreach (var hosp in Model)
+                {
+                    <div class="col">
+                        <div class="card card-cover h-100 overflow-hidden rounded-4" id="cards">
+                            <div class="d-flex flex-column h-100 p-3 pb-3 text-white text-shadow-1">
+                                <img class="img-card-top hospImg object-fit-cover" src="~/Images/Hospitals/@hosp.LINK_IMAGEN" alt="Imágen del hospital @hosp.NOMBRE" loading="lazy">
+                                <div class="hospInfo">
+                                    <div class="d-flex flex-column mt-auto">
+                                        <div>
+                                            <h2>Hospital @hosp.NOMBRE</h2>
+                                        </div>
+                                        <div class="d-flex flex-column mb-4">
+                                            <p class="card-text mt-2 mb-1">@hosp.DIRECCION</p>
+                                            <p class="card-text mb-3">Contacto: @hosp.TELEFONO</p>
+                                        </div>
+                                        @Html.ActionLink("Más detalles", "VistaDetalles", "Hospitales", new { hospCod = hosp.HOSPITAL_COD, hospNom = hosp.NOMBRE }, new { @class = "btn btn-primary" })
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            }
+                }
+            </div>
         </div>
     </div>
 }
@@ -41,4 +45,3 @@ else
 {
     <h3 class="hospError">No se han podido mostrar los hospitales</h3>
 }
-

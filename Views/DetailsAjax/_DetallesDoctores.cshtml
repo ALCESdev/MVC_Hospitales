@@ -1,41 +1,54 @@
 ﻿@using MVC_Hospitales.Models
 @model IQueryable<DOCTOR>
 
+<link href="@Url.Content("~/SASS/main.css")" rel="stylesheet" />
+
 @if (Model != null)
 {
 
     <table class="table">
-        <tr>
-            <th>
-                APELLIDO
-            </th>
-            <th>
-                ESPECIALIDAD
-            </th>
-            <th>
-                SALARIO
-            </th>
-            <th>
-                ACCIONES
-            </th>
-        </tr>
+        <thead>
+            <tr>
+                <th>
+                    APELLIDO
+                </th>
+                <th>
+                    ESPECIALIDAD
+                </th>
+                <th>
+                    SALARIO
+                </th>
+                <th>
+                    ACCIONES
+                </th>
+            </tr>
+        </thead>
 
         @foreach (var doc in Model)
         {
-            <tr>
-                <td>
-                    @doc.APELLIDO
-                </td>
-                <td>
-                    @doc.ESPECIALIDAD
-                </td>
-                <td>
-                    @doc.SALARIO €.
-                </td>
-                <td>
-                    @Html.ActionLink("Gestionar", "GestionEquipo", "Gestion", new { docNo = doc.DOCTOR_NO }, null)
-                </td>
-            </tr>
+            <tbody>
+                <tr>
+                    <td class="align-middle">
+                        @doc.APELLIDO
+                    </td>
+                    <td class="align-middle">
+                        @doc.ESPECIALIDAD
+                    </td>
+                    <td class="align-middle">
+                        @doc.SALARIO €.
+                    </td>
+                    <td class="align-middle">
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Acciones</button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="#">Descargar nómina</a></li>
+                                <li><a class="dropdown-item" href="#">Editar datos empleado</a></li>
+                                <li><a class="dropdown-item" href="#">Borrar empleado</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
         }
 
     </table>
@@ -44,4 +57,10 @@
 else
 {
     <h2 style="color:red">No existe equipo médico en este hospital</h2>
+}
+
+
+@section scripts
+{
+    @Scripts.Render("~/Scripts/bootstrap.bundle.js")
 }

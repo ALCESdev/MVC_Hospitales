@@ -1,29 +1,35 @@
 ﻿@using MVC_Hospitales.Models
 @model IQueryable<SALA>
 
+<link href="@Url.Content("~/SASS/main.css")" rel="stylesheet" />
+
 @if (Model != null)
 {
 
     <table class="table">
-        <tr>
-            <th>
-                TIPOS DE CUIDADOS (ESPECIALIDAD)
-            </th>
-            <th>
-                CAMAS DISPONIBLES
-            </th>
-        </tr>
+        <thead>
+            <tr>
+                <th>
+                    TIPOS DE CUIDADOS (ESPECIALIDAD)
+                </th>
+                <th>
+                    CAMAS DISPONIBLES
+                </th>
+            </tr>
+        </thead>
 
         @foreach (var sala in Model)
         {
-            <tr>
-                <td>
-                    @sala.NOMBRE
-                </td>
-                <td>
-                    @sala.NUM_CAMA
-                </td>
-            </tr>
+            <tbody>
+                <tr>
+                    <td class="align-middle">
+                        @sala.NOMBRE
+                    </td>
+                    <td class="align-middle">
+                        @sala.NUM_CAMA
+                    </td>
+                </tr>
+            </tbody>
         }
 
     </table>
