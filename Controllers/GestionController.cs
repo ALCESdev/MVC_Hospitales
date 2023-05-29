@@ -18,14 +18,22 @@ namespace MVC_Hospitales.Controllers
     {
         ModeloHospital modelo = new ModeloHospital();
 
-        public ActionResult NominaDoctor(String docNo)
+        public ActionResult EliminarDoc(String id)
+        {
+            modelo.EliminarDoctores(id);
+
+            return RedirectToAction("VistaDetalles");
+        }
+
+
+        public ActionResult InformeDoctor(String docNo)
         {
             DOCTOR doctor = modelo.GetInfoDoctor(docNo);
             Document docpdf = new Document(PageSize.LETTER);
 
             String ruta = HttpContext.Server.MapPath("/PDF/");
 
-            ruta = ruta + "nomina" + docNo.ToString() + ".pdf";
+            ruta = ruta + "informe" + docNo.ToString() + ".pdf";
 
             if (System.IO.File.Exists(ruta))
             {
@@ -35,14 +43,14 @@ namespace MVC_Hospitales.Controllers
             {
                 PdfWriter writer = PdfWriter.GetInstance(docpdf, new FileStream(ruta, FileMode.Create));
 
-                docpdf.AddTitle("Nómina del empleado: " + doctor.APELLIDO);
+                docpdf.AddTitle("Informe del empleado: " + doctor.APELLIDO);
                 docpdf.AddCreator("ALCES");
 
                 docpdf.Open();
 
                 iTextSharp.text.Font _standardFont = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 11, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
 
-                docpdf.Add(new Paragraph("Nómina del empleado: " + doctor.APELLIDO));
+                docpdf.Add(new Paragraph("Informe del empleado: " + doctor.APELLIDO));
                 docpdf.Add(new Paragraph(DateTime.Now.ToLongDateString()));
 
                 docpdf.Add(Chunk.NEWLINE);
@@ -88,14 +96,14 @@ namespace MVC_Hospitales.Controllers
             }
         }
 
-        public ActionResult NominaPersonal(String empNo)
+        public ActionResult InformePersonal(String empNo)
         {
             PLANTILLA plantilla = modelo.GetInfoPlantilla(empNo);
             Document docpdf = new Document(PageSize.LETTER);
 
             String ruta = HttpContext.Server.MapPath("/PDF/");
 
-            ruta = ruta + "nomina" + empNo.ToString() + ".pdf";
+            ruta = ruta + "informe" + empNo.ToString() + ".pdf";
 
             if (System.IO.File.Exists(ruta))
             {
@@ -105,14 +113,14 @@ namespace MVC_Hospitales.Controllers
             {
                 PdfWriter writer = PdfWriter.GetInstance(docpdf, new FileStream(ruta, FileMode.Create));
 
-                docpdf.AddTitle("Nómina del empleado: " + plantilla.APELLIDO);
+                docpdf.AddTitle("Informe del empleado: " + plantilla.APELLIDO);
                 docpdf.AddCreator("Ejemplo MVC");
 
                 docpdf.Open();
 
                 iTextSharp.text.Font _standardFont = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 11, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
 
-                docpdf.Add(new Paragraph("Nómina del empleado: " + plantilla.APELLIDO));
+                docpdf.Add(new Paragraph("Informe del empleado: " + plantilla.APELLIDO));
                 docpdf.Add(new Paragraph(DateTime.Now.ToLongDateString()));
 
                 docpdf.Add(Chunk.NEWLINE);

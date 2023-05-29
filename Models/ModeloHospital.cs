@@ -70,5 +70,16 @@ namespace MVC_Hospitales.Models
 
             return consulta;
         }
+
+        public void EliminarDoctores(String id)
+        {
+            DOCTOR doc = (from docs in contexto.DOCTOR
+                                 where docs.DOCTOR_NO == id
+                                 select docs).First();
+
+            contexto.DOCTOR.DeleteOnSubmit(doc);
+
+            contexto.SubmitChanges();
+        }
     }
 }

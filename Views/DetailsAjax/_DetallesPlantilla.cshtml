@@ -44,7 +44,14 @@
                         @plan.SALARIO €.
                     </td>
                     <td class="align-middle">
-                        @Html.ActionLink("Nómina", "NominaPersonal", "Gestion", new { empNo = plan.EMPLEADO_NO }, new { target = "_blank" })
+                        <div class="dropdown">
+                            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Acciones</button>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Descargar informe", "InformeEmpleado", "Gestion", new { docNo = plan.EMPLEADO_NO }, new { @class = "dropdown-item", target = "_blank" })</li>
+                                <li><a class="dropdown-item" href="#">Editar datos empleado</a></li>
+                                <li>@Html.ActionLink("Eliminar empleado", "EliminarEmp", "Gestion", new { id = plan.EMPLEADO_NO }, new { @class = "dropdown-item", onclick = $"return confirm('¿Está seguro que quiere eliminar el registro del empleado {plan.APELLIDO}?');" })</li>
+                            </ul>
+                        </div>
                     </td>
                 </tr>
             </tbody>

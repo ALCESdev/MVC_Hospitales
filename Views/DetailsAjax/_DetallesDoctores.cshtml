@@ -1,11 +1,14 @@
 ﻿@using MVC_Hospitales.Models
 @model IQueryable<DOCTOR>
 
+@Scripts.Render("~/Scripts/jquery-3.7.0.slim.min.js")
+@Scripts.Render("~/Scripts/umd/popper.min.js")
+@Scripts.Render("~/Scripts/bootstrap.bundle.min.js")
+
 <link href="@Url.Content("~/SASS/main.css")" rel="stylesheet" />
 
 @if (Model != null)
 {
-
     <table class="table">
         <thead>
             <tr>
@@ -39,11 +42,11 @@
                     </td>
                     <td class="align-middle">
                         <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Acciones</button>
+                            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Acciones</button>
                             <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="#">Descargar nómina</a></li>
+                                <li>@Html.ActionLink("Descargar informe", "InformeDoctor", "Gestion", new { docNo = doc.DOCTOR_NO }, new { @class = "dropdown-item", target = "_blank" })</li>
                                 <li><a class="dropdown-item" href="#">Editar datos empleado</a></li>
-                                <li><a class="dropdown-item" href="#">Borrar empleado</a></li>
+                                <li>@Html.ActionLink("Eliminar doctor", "EliminarDoc", "Gestion", new { id = doc.DOCTOR_NO }, new { @class = "dropdown-item", onclick = $"return confirm('¿Está seguro que quiere eliminar el registro del doctor {doc.APELLIDO}?');" })</li>
                             </ul>
                         </div>
                     </td>
@@ -57,10 +60,4 @@
 else
 {
     <h2 style="color:red">No existe equipo médico en este hospital</h2>
-}
-
-
-@section scripts
-{
-    @Scripts.Render("~/Scripts/bootstrap.bundle.js")
 }
